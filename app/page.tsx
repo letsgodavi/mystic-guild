@@ -43,47 +43,69 @@ const FontSystem = () => (
     body { font-family: 'Inter', sans-serif; background-color: #020205; }
     h1, h2, h3, h4, .font-tech, button, .stat-value { font-family: 'Rajdhani', sans-serif; }
     
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(147, 51, 234, 0.5); }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+    ::-webkit-scrollbar-thumb { background: rgba(147, 51, 234, 0.2); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(147, 51, 234, 0.6); }
 
     @keyframes pulse-red {
       0%, 100% { text-shadow: 0 0 10px rgba(239, 68, 68, 0.5); transform: scale(1); }
-      50% { text-shadow: 0 0 30px rgba(239, 68, 68, 0.8); transform: scale(1.05); }
+      50% { text-shadow: 0 0 30px rgba(239, 68, 68, 0.8); transform: scale(1.03); }
     }
 
     .tactical-grid {
-      background-size: 50px 50px;
+      background-size: 40px 40px;
       background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
       mask-image: radial-gradient(circle at var(--x, 50%) var(--y, 50%), black 0%, transparent 80%);
       -webkit-mask-image: radial-gradient(circle 600px at var(--x, 50%) var(--y, 50%), black 0%, transparent 80%);
     }
 
-    /* --- ✅ NEW ANIMATIONS FOR ENCHANT SIM --- */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-15px); }
-    }
-    @keyframes shake-hard {
-      0% { transform: translate(1px, 1px) rotate(0deg); }
-      10% { transform: translate(-1px, -2px) rotate(-1deg); }
-      20% { transform: translate(-3px, 0px) rotate(1deg); }
-      30% { transform: translate(3px, 2px) rotate(0deg); }
-      40% { transform: translate(1px, -1px) rotate(1deg); }
-      50% { transform: translate(-1px, 2px) rotate(-1deg); }
-      60% { transform: translate(-3px, 1px) rotate(0deg); }
-      70% { transform: translate(3px, 1px) rotate(-1deg); }
-      80% { transform: translate(-1px, -1px) rotate(1deg); }
-      90% { transform: translate(1px, 2px) rotate(0deg); }
-      100% { transform: translate(1px, -2px) rotate(-1deg); }
+    /* --- PREMIUM STYLING CLASSES --- */
+    .glass-card {
+      background: rgba(12, 12, 18, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    /* Class เรียกใช้ */
-    .animate-float { animation: float 4s ease-in-out infinite; }
-    .animate-shake-hard { animation: shake-hard 0.5s infinite; }
+    .glass-card:hover {
+      border-color: rgba(147, 51, 234, 0.3);
+      box-shadow: 0 8px 32px 0 rgba(147, 51, 234, 0.08), 0 0 15px 0 rgba(147, 51, 234, 0.15);
+    }
+
+    .neon-glow-purple:hover {
+      box-shadow: 0 0 25px rgba(168, 85, 247, 0.25);
+      border-color: rgba(168, 85, 247, 0.4);
+    }
+    .neon-glow-red:hover {
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.25);
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+    .neon-glow-amber:hover {
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.25);
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+    .neon-glow-blue:hover {
+      box-shadow: 0 0 25px rgba(59, 130, 246, 0.25);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .animate-float { animation: float 6s ease-in-out infinite; }
+
+    @keyframes orbit-spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .animate-orbit-slow { animation: orbit-spin 20s linear infinite; }
+    .animate-orbit-reverse { animation: orbit-spin 12s linear infinite reverse; }
   `}</style>
 );
 
@@ -119,8 +141,8 @@ const StatGroup = ({ title, items, colorClass, members }: any) => {
     };
 
     return (
-      <div className="bg-[#0f0f13]/60 backdrop-blur-xl rounded-2xl p-4 md:p-5 border border-white/[0.08] shadow-lg">
-        <div className="flex items-center gap-3 mb-4 border-b border-white/[0.08] pb-3">
+      <div className="glass-card rounded-2xl p-4 md:p-5 shadow-lg">
+        <div className="flex items-center gap-3 mb-4 border-b border-white/5 pb-3">
            <div className={`w-1.5 h-4 rounded-full ${gradientMap[colorClass] || 'bg-white'}`}></div>
            <h4 className={`text-sm md:text-lg font-bold uppercase tracking-wide ${colorClass}`}>{title}</h4>
         </div>
@@ -194,7 +216,7 @@ const OracleLoungeCard = ({ onNavigate }: any) => {
     return (
         <div 
             onClick={() => onNavigate('ORACLE')}
-            className="group relative h-full min-h-[140px] bg-[#0a0a0e] border border-white/10 rounded-[24px] overflow-hidden cursor-pointer hover:border-amber-500/50 hover:shadow-[0_0_20px_rgba(251,191,36,0.2)] transition-all"
+            className="group relative h-full min-h-[140px] glass-card neon-glow-amber hover:scale-[1.02] duration-300 rounded-[24px] overflow-hidden cursor-pointer"
         >
             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20"></div>
             <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-amber-900/10"></div>
@@ -347,24 +369,24 @@ const BossCard = ({ boss, variant, now, isAdmin, onEdit }: any) => {
         progressPercent = Math.min(100, Math.max(0, (timePassed / totalDuration) * 100));
     }
 
-    let containerStyle = "relative rounded-xl border transition-all duration-500 overflow-hidden group ";
-    if (variant === 'threat') containerStyle += "bg-red-900/20 border-red-500/50 shadow-[0_0_30px_rgba(239,68,68,0.15)] p-4";
-    else if (variant === 'warning') containerStyle += "bg-yellow-900/10 border-yellow-500/30 p-4";
-    else containerStyle += "bg-[#0a0a0e] border-white/5 hover:border-white/10 hover:bg-[#121216] flex items-center justify-between gap-4 py-3 px-4";
+    let containerStyle = "relative rounded-xl border transition-all duration-300 overflow-hidden group glass-card hover:scale-[1.02] ";
+    if (variant === 'threat') containerStyle += "neon-glow-red bg-red-950/20 border-red-500/50 shadow-[0_0_25px_rgba(239,68,68,0.15)] p-4";
+    else if (variant === 'warning') containerStyle += "neon-glow-amber bg-amber-950/10 border-amber-500/30 p-4";
+    else containerStyle += "neon-glow-purple border-white/5 flex items-center justify-between gap-4 py-3 px-4 hover:scale-[1.01]";
 
     return (
         <div className={containerStyle}>
             {bgImage && (
                 <>
-                    <div className={`absolute inset-0 bg-cover bg-center z-0 transition-opacity duration-700 mix-blend-luminosity group-hover:mix-blend-normal ${variant === 'safe' ? 'opacity-[0.07] group-hover:opacity-[0.15]' : 'opacity-20 group-hover:opacity-40'}`} style={{ backgroundImage: `url(${bgImage})` }}></div>
-                    <div className={`absolute inset-0 z-0 bg-gradient-to-t from-black ${variant === 'safe' ? 'via-black/50' : 'via-black/80'} to-transparent`}></div>
+                    <div className={`absolute inset-0 bg-cover bg-center z-0 transition-opacity duration-700 mix-blend-luminosity group-hover:mix-blend-normal ${variant === 'safe' ? 'opacity-[0.05] group-hover:opacity-[0.12]' : 'opacity-20 group-hover:opacity-40'}`} style={{ backgroundImage: `url(${bgImage})` }}></div>
+                    <div className={`absolute inset-0 z-0 bg-gradient-to-t from-[#020205] ${variant === 'safe' ? 'via-[#020205]/40' : 'via-[#020205]/80'} to-transparent`}></div>
                 </>
             )}
 
             {/* Progress Bar */}
             {status === 'DEAD' && variant !== 'safe' && (
-                <div className="absolute bottom-0 left-0 h-1 bg-white/10 w-full z-0">
-                    <div className={`h-full transition-all duration-1000 ease-linear ${variant === 'threat' ? 'bg-red-500' : 'bg-yellow-500'}`} style={{ width: `${progressPercent}%` }}></div>
+                <div className="absolute bottom-0 left-0 h-1 bg-white/5 w-full z-0">
+                    <div className={`h-full transition-all duration-1000 ease-linear ${variant === 'threat' ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]' : 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]'}`} style={{ width: `${progressPercent}%` }}></div>
                 </div>
             )}
 
@@ -374,14 +396,22 @@ const BossCard = ({ boss, variant, now, isAdmin, onEdit }: any) => {
                         <div className="flex items-center gap-2">
                             {variant === 'safe' && bgImage && (<div className="w-8 h-8 rounded-full border border-white/10 p-0.5 bg-black/50"><img src={bgImage} className="w-full h-full rounded-full object-cover" alt="icon" /></div>)}
                             <h3 className={`font-bold font-tech uppercase ${variant === 'threat' ? 'text-2xl text-white drop-shadow-md' : variant === 'warning' ? 'text-lg text-white' : 'text-sm text-slate-300 group-hover:text-white transition-colors'}`}>{boss.name}</h3>
-                            {chance < 100 && <span className={`text-[9px] px-1.5 rounded font-bold border ${chance <= 33 ? 'border-red-500 text-red-400' : 'border-yellow-500 text-yellow-400'}`}>{chance}%</span>}
+                            {chance < 100 && <span className={`text-[9px] px-1.5 rounded font-bold border ${chance <= 33 ? 'border-red-500 text-red-400 bg-red-500/10' : 'border-yellow-500 text-yellow-400 bg-yellow-500/10'}`}>{chance}%</span>}
                         </div>
-                        {variant !== 'safe' && <span className={`text-[10px] font-bold tracking-widest ${color}`}>{label}</span>}
+                        {variant !== 'safe' && (
+                            <span className={`inline-block mt-1 self-start text-[9px] font-extrabold tracking-wider px-2 py-0.5 rounded-full border ${
+                                status === 'ALIVE' 
+                                ? 'bg-green-500/20 border-green-500/40 text-green-400 shadow-[0_0_10px_rgba(34,197,94,0.3)] animate-pulse' 
+                                : 'bg-red-500/15 border-red-500/30 text-red-400 shadow-[0_0_10px_rgba(239,68,68,0.15)]'
+                            }`}>
+                                {label}
+                            </span>
+                        )}
                     </div>
                     
                     <div className="flex items-center gap-2">
                         {isAdmin && <button onClick={(e) => { e.stopPropagation(); onEdit(boss); }} className="w-6 h-6 rounded-full bg-black/50 hover:bg-white/20 flex items-center justify-center text-[10px] text-slate-400 border border-white/10 transition-colors backdrop-blur-sm">✎</button>}
-                        <div className={`w-2.5 h-2.5 rounded-full ${status === 'ALIVE' ? 'bg-green-500 animate-ping' : 'bg-slate-700'}`}></div>
+                        <div className={`w-2.5 h-2.5 rounded-full ${status === 'ALIVE' ? 'bg-green-500 animate-ping shadow-[0_0_8px_rgba(34,197,94,0.8)]' : 'bg-slate-700'}`}></div>
                     </div>
                 </div>
 
@@ -393,7 +423,7 @@ const BossCard = ({ boss, variant, now, isAdmin, onEdit }: any) => {
                     {/* กรณี: ตายอยู่ (แสดงเวลาเกิด) */}
                     {status === 'DEAD' && (
                         <div className={`text-[10px] font-bold uppercase mt-0.5 flex items-center justify-center gap-1.5 ${variant === 'safe' ? 'justify-end text-slate-500' : 'text-slate-400'}`}>
-                            <Clock size={12} strokeWidth={2.5} />
+                            <Clock size={12} strokeWidth={2.5} className="text-purple-400" />
                             <span>{spawnTimeStr}</span>
                         </div>
                     )}
@@ -401,7 +431,7 @@ const BossCard = ({ boss, variant, now, isAdmin, onEdit }: any) => {
                     {/* ✅ กรณี: เกิดแล้ว (แสดงเวลาที่เกิด แทน Ready to Kill) */}
                     {status === 'ALIVE' && (
                         <div className="text-[10px] text-green-400 uppercase font-bold animate-bounce mt-1 flex items-center justify-center gap-1">
-                             <Clock size={12} strokeWidth={2.5} />
+                             <Clock size={12} strokeWidth={2.5} className="text-green-400" />
                              <span>Spawned at {spawnTimeStr}</span>
                         </div>
                     )}
@@ -612,14 +642,15 @@ const WelcomeLounge = ({ user, myStats, bosses, onNavigate, members }: any) => {
             {/* HERO BANNER */}
             <div 
                 onClick={() => onNavigate('PROFILE')} 
-                className="relative overflow-hidden rounded-[32px] bg-gradient-to-r from-purple-900/40 to-blue-900/40 border border-white/10 p-8 shadow-2xl cursor-pointer hover:border-purple-500/50 hover:bg-white/[0.02] transition-all group"
+                className="relative overflow-hidden rounded-[32px] glass-card neon-glow-purple hover:scale-[1.01] transition-all duration-300 p-8 shadow-2xl cursor-pointer group"
             >
                 <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/20 blur-[100px] rounded-full pointer-events-none"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-950/20 via-[#0a0a0f]/60 to-indigo-950/20 pointer-events-none"></div>
                 <div className="relative z-10 flex flex-col md:flex-row items-center gap-6">
                     <div className="relative group">
                         <div className="absolute inset-0 bg-gradient-to-tr from-purple-500 to-blue-500 rounded-full blur opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
                         <img src={user?.user_metadata?.avatar_url} className="w-24 h-24 rounded-full border-4 border-white/10 relative z-10 shadow-xl group-hover:scale-105 transition-transform" alt="Profile" />
-                        <div className="absolute bottom-1 right-1 w-5 h-5 bg-green-500 border-4 border-[#0a0a0e] rounded-full z-20"></div>
+                        <div className="absolute bottom-1 right-1 w-5 h-5 bg-green-500 border-4 border-[#020205] rounded-full z-20"></div>
                     </div>
                     <div className="text-center md:text-left">
                         <div className="text-purple-400 font-bold tracking-[0.2em] text-xs uppercase mb-1 font-tech animate-pulse">Welcome Back, Commander</div>
@@ -636,15 +667,15 @@ const WelcomeLounge = ({ user, myStats, bosses, onNavigate, members }: any) => {
                 {/* NEXT BOSS */}
                 <div 
                     onClick={() => onNavigate('BOSS_TIME')}
-                    className="md:col-span-2 bg-[#0f0f13]/60 backdrop-blur-xl border border-white/10 rounded-[24px] p-6 relative overflow-hidden group cursor-pointer hover:border-red-500/30 transition-all hover:bg-[#0f0f13]/80"
+                    className="md:col-span-2 glass-card neon-glow-red hover:scale-[1.02] duration-300 rounded-[24px] p-6 relative overflow-hidden group cursor-pointer"
                 >
                     {bossImage ? (
                         <>
                             <div className="absolute inset-0 bg-cover bg-center z-0 transition-all duration-700 opacity-20 group-hover:opacity-40 group-hover:scale-105 mix-blend-luminosity group-hover:mix-blend-normal" style={{ backgroundImage: `url(${bossImage})` }}></div>
-                            <div className="absolute inset-0 bg-gradient-to-r from-[#0f0f13] via-[#0f0f13]/80 to-transparent z-0"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#0c0c12] via-[#0c0c12]/80 to-transparent z-0"></div>
                         </>
                     ) : (
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><Swords size={90} /></div>
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity text-red-500"><Swords size={90} /></div>
                     )}
                     <div className="relative z-10 flex justify-between items-start mb-4">
                         <div>
@@ -673,7 +704,7 @@ const WelcomeLounge = ({ user, myStats, bosses, onNavigate, members }: any) => {
                 <OracleLoungeCard onNavigate={onNavigate} />
 
                 {/* MY STATUS CARD */}
-                <div onClick={() => onNavigate('PROFILE')} className="bg-gradient-to-br from-purple-900/20 to-black border border-white/10 rounded-[24px] p-6 cursor-pointer hover:border-purple-500/30 transition-all group">
+                <div onClick={() => onNavigate('PROFILE')} className="glass-card neon-glow-purple hover:scale-[1.02] duration-300 rounded-[24px] p-6 cursor-pointer group">
                     <h3 className="text-slate-400 text-xs font-bold uppercase tracking-widest font-tech mb-2">My Performance</h3>
                     <div className="flex flex-col gap-1">
                         <div className="flex items-end gap-2">
@@ -689,7 +720,7 @@ const WelcomeLounge = ({ user, myStats, bosses, onNavigate, members }: any) => {
                 </div>
 
                 {/* QUICK ACTIONS ROW */}
-                <div onClick={() => onNavigate('INTEL')} className="bg-[#0f0f13]/60 backdrop-blur-xl border border-white/10 rounded-[24px] p-6 cursor-pointer hover:bg-white/5 transition-all group">
+                <div onClick={() => onNavigate('INTEL')} className="glass-card neon-glow-blue hover:scale-[1.02] duration-300 rounded-[24px] p-6 cursor-pointer group">
                       <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                           <BarChart3 className="text-blue-400" size={20} />
                       </div>
@@ -697,7 +728,7 @@ const WelcomeLounge = ({ user, myStats, bosses, onNavigate, members }: any) => {
                       <p className="text-xs text-slate-500">View Guild Rankings & Stats</p>
                 </div>
 
-                <div onClick={() => onNavigate('COMPARE')} className="bg-[#0f0f13]/60 backdrop-blur-xl border border-white/10 rounded-[24px] p-6 cursor-pointer hover:bg-white/5 transition-all group">
+                <div onClick={() => onNavigate('COMPARE')} className="glass-card neon-glow-red hover:scale-[1.02] duration-300 rounded-[24px] p-6 cursor-pointer group">
                       <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                           <Scale className="text-red-400" size={20} />
                       </div>
@@ -803,23 +834,23 @@ const handleEditClick = (boss: any) => {
 
     return (
         <div className="animate-in fade-in duration-500 space-y-8 pb-20">
-            <div className="flex flex-wrap justify-between gap-4 items-center">
+            <div className="flex flex-wrap justify-between gap-4 items-center p-4 glass-card rounded-2xl border-white/5">
                 <div className="flex items-center gap-3">
-                    <button onClick={() => fetchBosses(true)} disabled={isRefreshing} className={`w-8 h-8 rounded-full border border-white/10 flex items-center justify-center transition-all bg-white/5 hover:bg-white/10 ${isRefreshing ? 'animate-spin text-purple-400 border-purple-500' : 'text-slate-400 hover:text-white'}`} title="Force Refresh Data">⟳</button>
-                    <div className="flex flex-col"><span className="text-[9px] text-slate-500 uppercase tracking-widest font-bold">Last Sync</span><span className="text-[10px] text-slate-300 font-tech">{lastUpdatedTime || "Just now"}</span></div>
+                    <button onClick={() => fetchBosses(true)} disabled={isRefreshing} className={`w-8 h-8 rounded-full border border-white/10 flex items-center justify-center transition-all bg-white/5 hover:bg-white/10 active:scale-95 ${isRefreshing ? 'animate-spin text-purple-450 border-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.3)]' : 'text-slate-400 hover:text-white'}`} title="Force Refresh Data">⟳</button>
+                    <div className="flex flex-col"><span className="text-[9px] text-slate-500 uppercase tracking-widest font-bold">Last Sync</span><span className="text-[10px] text-slate-350 font-tech">{lastUpdatedTime || "Just now"}</span></div>
                 </div>
                 <div className="flex flex-wrap gap-2 items-center justify-end">
-                    <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-                        <span className="text-xs text-slate-400 font-bold uppercase">♫</span>
-                        <select value={selectedSound} onChange={handleSoundChange} className="bg-transparent text-xs font-bold text-white outline-none cursor-pointer uppercase font-tech appearance-none">
-                            <option value="/sounds/alarm3n.mp3" className="bg-black text-white">1. Normal</option>
-                            <option value="/sounds/alarm.mp3" className="bg-black text-white">2. Semi-Hardcore</option>
-                            <option value="/sounds/alarm2.mp3" className="bg-black text-white">3. Hardcore</option>
+                    <div className="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-full border border-white/10">
+                        <span className="text-xs text-purple-400 font-bold uppercase">♫</span>
+                        <select value={selectedSound} onChange={handleSoundChange} className="bg-transparent text-xs font-bold text-white outline-none cursor-pointer uppercase font-tech appearance-none pr-1">
+                            <option value="/sounds/alarm3n.mp3" className="bg-[#0f0f13] text-white">1. Normal</option>
+                            <option value="/sounds/alarm.mp3" className="bg-[#0f0f13] text-white">2. Semi-Hardcore</option>
+                            <option value="/sounds/alarm2.mp3" className="bg-[#0f0f13] text-white">3. Hardcore</option>
                         </select>
                     </div>
-                    <button onClick={handleCopySchedule} className={`px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2 ${isCopied ? 'bg-green-500 border-green-500 text-white' : 'bg-blue-600/20 border-blue-500 text-blue-400 hover:bg-blue-600/40'}`}><span>{isCopied ? '✅ COPIED!' : '📋 COPY 6H'}</span></button>
-                    <button onClick={testSound} className="px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-bold hover:bg-purple-500/20 transition-all uppercase tracking-widest">🔔 TEST</button>
-                    <button onClick={toggleSound} className={`flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-widest transition-all ${isSoundOn ? 'bg-green-500/10 border-green-500 text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.3)]' : 'bg-white/5 border-white/10 text-slate-500 hover:text-white'}`}><span>{isSoundOn ? '🔊' : '🔇'}</span><span>{isSoundOn ? 'ON' : 'OFF'}</span></button>
+                    <button onClick={handleCopySchedule} className={`px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-widest transition-all active:scale-95 flex items-center gap-2 ${isCopied ? 'bg-green-600 border-green-500 text-white shadow-[0_0_15px_rgba(34,197,94,0.3)]' : 'bg-blue-600/10 border-blue-500/30 text-blue-400 hover:bg-blue-600/20 hover:border-blue-500/80'}`}><span>{isCopied ? '✅ COPIED!' : '📋 COPY 6H'}</span></button>
+                    <button onClick={testSound} className="px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 text-purple-400 text-xs font-bold hover:bg-purple-500/20 hover:border-purple-500/60 transition-all active:scale-95 uppercase tracking-widest">🔔 TEST</button>
+                    <button onClick={toggleSound} className={`flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-widest transition-all active:scale-95 ${isSoundOn ? 'bg-green-500/10 border-green-500 text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.3)]' : 'bg-white/5 border-white/10 text-slate-500 hover:text-white'}`}><span>{isSoundOn ? '🔊' : '🔇'}</span><span>{isSoundOn ? 'ON' : 'OFF'}</span></button>
                 </div>
             </div>
             
@@ -896,11 +927,11 @@ const BossEditModal = ({ isOpen, onClose, onConfirm, boss }: any) => {
 
     return (
         <div className="fixed inset-0 z-[200] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
-            <div className="bg-[#0f0f13] border border-white/10 rounded-2xl w-full max-w-sm p-6 shadow-2xl relative overflow-hidden">
+            <div className="glass-card neon-glow-purple rounded-2xl w-full max-w-sm p-6 shadow-2xl relative overflow-hidden">
                 {/* Background FX */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/20 blur-[50px] rounded-full pointer-events-none"></div>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 blur-[50px] rounded-full pointer-events-none"></div>
 
-                <h3 className="text-xl font-bold text-white mb-1 font-tech uppercase">Update Status</h3>
+                <h3 className="text-xl font-bold text-white mb-1 font-tech uppercase tracking-wider">Update Status</h3>
                 <p className="text-sm text-slate-400 mb-6">Target: <span className="text-purple-400 font-bold">{boss.name}</span></p>
 
                 <div className="space-y-3">
@@ -909,7 +940,7 @@ const BossEditModal = ({ isOpen, onClose, onConfirm, boss }: any) => {
                         {/* ปุ่มซ้าย: DIED (ตายเดี๋ยวนี้) */}
                         <button 
                             onClick={() => handleJustDied(0)}
-                            className="bg-red-600 hover:bg-red-500 text-white py-4 rounded-xl font-bold text-lg uppercase tracking-widest shadow-lg shadow-red-900/20 transition-all active:scale-95 flex flex-col items-center justify-center gap-1"
+                            className="bg-red-650/80 hover:bg-red-600 text-white py-4 rounded-xl font-bold text-lg uppercase tracking-widest shadow-lg shadow-red-950/30 border border-red-500/30 hover:border-red-500/80 transition-all active:scale-95 flex flex-col items-center justify-center gap-1 neon-glow-red"
                         >
                             <span>🔥 DIED</span>
                             <span className="text-[9px] font-normal opacity-70 normal-case">Reset to NOW</span>
@@ -918,7 +949,7 @@ const BossEditModal = ({ isOpen, onClose, onConfirm, boss }: any) => {
                         {/* ปุ่มขวา: SKIP (ข้ามรอบ/ไม่เกิด) */}
                         <button 
                             onClick={handleSkip} 
-                            className="bg-blue-600 hover:bg-blue-500 text-white py-4 rounded-xl font-bold text-lg uppercase tracking-widest shadow-lg shadow-blue-900/20 transition-all active:scale-95 flex flex-col items-center justify-center gap-1"
+                            className="bg-blue-650/80 hover:bg-blue-600 text-white py-4 rounded-xl font-bold text-lg uppercase tracking-widest shadow-lg shadow-blue-950/30 border border-blue-500/30 hover:border-blue-500/80 transition-all active:scale-95 flex flex-col items-center justify-center gap-1 neon-glow-blue"
                         >
                             <span>⏩ SKIP</span>
                             <span className="text-[9px] font-normal opacity-70 normal-case">Count from Spawn</span>
@@ -927,31 +958,31 @@ const BossEditModal = ({ isOpen, onClose, onConfirm, boss }: any) => {
 
                     {/* ปุ่มแก้เวลา: -1 / -2 นาที */}
                     <div className="grid grid-cols-2 gap-3">
-                        <button onClick={() => handleJustDied(1)} className="bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 py-3 rounded-xl font-bold text-sm transition-all hover:border-red-500/50 hover:text-white">
+                        <button onClick={() => handleJustDied(1)} className="bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 text-slate-350 py-3 rounded-xl font-bold text-sm transition-all hover:border-red-500/40 hover:text-white">
                             - 1 Min Ago
                         </button>
-                        <button onClick={() => handleJustDied(2)} className="bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 py-3 rounded-xl font-bold text-sm transition-all hover:border-red-500/50 hover:text-white">
+                        <button onClick={() => handleJustDied(2)} className="bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 text-slate-350 py-3 rounded-xl font-bold text-sm transition-all hover:border-red-500/40 hover:text-white">
                             - 2 Mins Ago
                         </button>
                     </div>
 
                     <div className="relative flex py-2 items-center">
-                        <div className="flex-grow border-t border-white/10"></div>
-                        <span className="flex-shrink-0 mx-4 text-gray-600 text-xs uppercase">OR Custom Time</span>
-                        <div className="flex-grow border-t border-white/10"></div>
+                        <div className="flex-grow border-t border-white/5"></div>
+                        <span className="flex-shrink-0 mx-4 text-gray-500 text-[10px] tracking-wider uppercase font-tech">OR Custom Time</span>
+                        <div className="flex-grow border-t border-white/5"></div>
                     </div>
 
                     {/* เลือกเวลาเอง */}
                     <div className="flex gap-2">
                         <input 
                             type="time" 
-                            className="bg-black border border-white/20 text-white rounded-xl px-4 py-3 flex-1 text-center text-lg font-bold focus:border-purple-500 outline-none appearance-none"
+                            className="bg-black/40 border border-white/10 text-white rounded-xl px-4 py-3 flex-1 text-center text-lg font-bold focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/10 outline-none appearance-none transition-all"
                             onChange={(e) => setCustomTime(e.target.value)}
                         />
                         <button 
                             onClick={() => { if(customTime) onConfirm(customTime); }}
                             disabled={!customTime}
-                            className="bg-purple-600 disabled:bg-slate-800 text-white px-6 rounded-xl font-bold uppercase"
+                            className="bg-purple-650 hover:bg-purple-650 text-white px-6 rounded-xl font-bold uppercase transition-all border border-purple-500/30 hover:border-purple-500/80 disabled:bg-slate-900 disabled:text-slate-600 disabled:border-white/5 font-tech tracking-wider"
                         >
                             SET
                         </button>
@@ -1096,25 +1127,31 @@ const MysticNavigation = ({ activeTab, setActiveTab, user, ingameName, isGuest, 
   return (
     <>
       {/* DESKTOP TOP BAR */}
-      <nav className="hidden md:flex sticky top-0 z-50 bg-[#020205]/80 backdrop-blur-xl border-b border-white/5 py-4 px-8 justify-between items-center transition-all">
+      <nav className="hidden md:flex sticky top-0 z-50 bg-[#030307]/70 backdrop-blur-xl border-b border-white/[0.06] py-4 px-8 justify-between items-center transition-all">
         <div onClick={() => setActiveTab('LOUNGE')} className="flex items-center gap-3 cursor-pointer group">
-          <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-700 rounded-xl flex items-center justify-center font-bold text-white shadow-[0_0_15px_rgba(147,51,234,0.3)] font-tech text-2xl group-hover:scale-105 transition-transform">M</div>
+          <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-indigo-700 rounded-xl flex items-center justify-center font-bold text-white shadow-[0_0_15px_rgba(147,51,234,0.4)] font-tech text-2xl group-hover:scale-105 transition-transform">M</div>
           <div>
-            <span className="font-bold italic uppercase text-white tracking-tighter text-xl block leading-none">Mystic<span className="text-purple-500">Hub</span></span>
+            <span className="font-bold italic uppercase text-white tracking-tighter text-xl block leading-none">Mystic<span className="text-purple-500 font-black">Hub</span></span>
             <span className="text-[9px] text-slate-500 uppercase tracking-[0.3em] font-bold">Guild Command</span>
           </div>
         </div>
-        <div className="flex bg-white/[0.03] p-1.5 rounded-xl border border-white/5 gap-1">
-          {MENU_ITEMS// ✅ แทรกตรงนี้: ถ้าเป็น ORACLE และไม่ใช่ Bluelabel ให้ดีดทิ้ง
-  .filter(item => item.id !== 'ORACLE' || ingameName?.toUpperCase() === 'BLUELABEL') 
-  .map((item) => (
-            <button key={item.id} onClick={() => setActiveTab(item.id)} className={`px-4 py-2 rounded-lg text-xs font-bold tracking-wider transition-all duration-300 relative overflow-hidden whitespace-nowrap font-tech flex items-center gap-2 ${activeTab === item.id ? 'text-white shadow-lg bg-white/10' : 'text-slate-500 hover:text-slate-300 hover:bg-white/5'}`}>
-              {activeTab === item.id && <div className="absolute inset-0 bg-gradient-to-r from-purple-600/80 to-blue-600/80 -z-10"></div>}
-              {/* ✅ แก้ตรงนี้: เรียกใช้ไอคอนแบบ Component */}
-              <item.icon size={16} strokeWidth={2.5} />
-              {item.label}
-            </button>
-          ))}
+        <div className="flex bg-white/[0.02] p-1 rounded-xl border border-white/[0.05] gap-1 backdrop-blur-md">
+          {MENU_ITEMS
+            .filter(item => item.id !== 'ORACLE' || ingameName?.toUpperCase() === 'BLUELABEL') 
+            .map((item) => {
+              const isActive = activeTab === item.id;
+              return (
+                <button 
+                  key={item.id} 
+                  onClick={() => setActiveTab(item.id)} 
+                  className={`px-4 py-2 rounded-lg text-xs font-bold tracking-wider transition-all duration-300 relative overflow-hidden whitespace-nowrap font-tech flex items-center gap-2 ${isActive ? 'text-white shadow-[0_0_15px_rgba(168,85,247,0.2)] bg-white/10' : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.04]'}`}
+                >
+                  {isActive && <div className="absolute inset-0 bg-gradient-to-r from-purple-600/80 to-indigo-600/80 -z-10"></div>}
+                  <item.icon size={15} strokeWidth={2.5} className={isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-200'} />
+                  {item.label}
+                </button>
+              );
+            })}
         </div>
         <div className="flex items-center gap-4 group cursor-pointer" onClick={onLogout}>
           <div className="flex flex-col items-end">
@@ -1122,16 +1159,20 @@ const MysticNavigation = ({ activeTab, setActiveTab, user, ingameName, isGuest, 
             <span className="text-[9px] font-bold text-slate-500 uppercase mt-1 group-hover:text-red-400 transition-colors tracking-widest">Logout</span>
           </div>
           <div className="relative">
-            {isGuest ? <div className="w-10 h-10 rounded-full border-2 border-white/10 bg-slate-800 flex items-center justify-center text-white font-bold">{ingameName?.charAt(0)}</div> : <img src={user?.user_metadata?.avatar_url} className="w-10 h-10 rounded-full border-2 border-white/10 group-hover:border-red-500/50 transition-all" alt="av" />}
+            {isGuest ? (
+              <div className="w-10 h-10 rounded-full border-2 border-white/10 bg-slate-800 flex items-center justify-center text-white font-bold">{ingameName?.charAt(0)}</div>
+            ) : (
+              <img src={user?.user_metadata?.avatar_url} className="w-10 h-10 rounded-full border-2 border-white/10 group-hover:border-red-500/50 transition-all object-cover" alt="av" />
+            )}
             <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-black animate-pulse"></div>
           </div>
         </div>
       </nav>
 
       {/* MOBILE HEADER */}
-      <div className="md:hidden flex justify-between items-center p-4 sticky top-0 z-40 bg-[#020205]/90 backdrop-blur-md border-b border-white/5">
+      <div className="md:hidden flex justify-between items-center p-4 sticky top-0 z-40 bg-[#030307]/80 backdrop-blur-md border-b border-white/[0.06]">
          <div onClick={() => setActiveTab('LOUNGE')} className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-blue-700 rounded-lg flex items-center justify-center font-bold text-white text-lg font-tech">M</div>
+            <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-indigo-750 rounded-lg flex items-center justify-center font-bold text-white text-lg font-tech shadow-[0_0_10px_rgba(147,51,234,0.3)]">M</div>
             <span className="font-bold italic uppercase text-white tracking-tighter text-lg">Mystic</span>
          </div>
          <div onClick={onLogout} className="flex items-center gap-2">
@@ -1143,8 +1184,8 @@ const MysticNavigation = ({ activeTab, setActiveTab, user, ingameName, isGuest, 
       </div>
 
       {/* MOBILE BOTTOM BAR (Classic Stable) */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#050508] border-t border-white/10 pb-safe pt-1 shadow-[0_-10px_40px_rgba(0,0,0,0.8)]">
-        <div className="flex items-center overflow-x-auto no-scrollbar px-2 pb-2">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#030307]/90 backdrop-blur-lg border-t border-white/[0.08] pb-safe pt-1 shadow-[0_-10px_40px_rgba(0,0,0,0.85)]">
+        <div className="flex items-center overflow-x-auto no-scrollbar px-2 pb-2 justify-around">
           {MENU_ITEMS.map((item) => {
              const isActive = activeTab === item.id;
              return (
@@ -1153,19 +1194,18 @@ const MysticNavigation = ({ activeTab, setActiveTab, user, ingameName, isGuest, 
                 onClick={() => setActiveTab(item.id)}
                 className={`
                     flex-shrink-0 flex flex-col items-center justify-center 
-                    w-[22%] min-w-[76px] py-3 rounded-xl transition-all duration-200
-                    ${isActive ? 'bg-white/[0.08]' : 'active:bg-white/[0.02]'}
+                    py-2 rounded-xl transition-all duration-200 relative px-3
+                    ${isActive ? 'bg-white/[0.06]' : 'active:bg-white/[0.02]'}
                 `}
               >
                 <div className={`mb-1 transition-all ${isActive ? 'text-white scale-110 drop-shadow-[0_0_8px_rgba(168,85,247,0.8)]' : 'text-slate-500'}`}>
-                  {/* ✅ แก้ตรงนี้: ไอคอนมือถือ */}
-                  <item.icon size={isActive ? 24 : 20} strokeWidth={isActive ? 2.5 : 2} />
+                  <item.icon size={isActive ? 22 : 18} strokeWidth={isActive ? 2.5 : 2} />
                 </div>
                 <span className={`text-[9px] font-bold uppercase tracking-wider transition-colors ${isActive ? 'text-white' : 'text-slate-600'}`}>
                     {item.mobileLabel}
                 </span>
                 {isActive && (
-                    <div className="absolute top-0 w-8 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-b-full shadow-[0_0_10px_#a855f7]"></div>
+                    <div className="absolute top-0 w-8 h-0.5 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-b-full shadow-[0_0_10px_#a855f7]"></div>
                 )}
               </button>
              )
@@ -1309,8 +1349,16 @@ export default function MysticHub() {
     return () => clearInterval(interval);
   }, []);
 
+  const classData = useMemo(() => {
+    const counts: Record<string, number> = {};
+    members.forEach(m => {
+        const cls = m.char_class && m.char_class.trim() !== '' ? m.char_class : 'Novice';
+        counts[cls] = (counts[cls] || 0) + 1;
+    });
+    return Object.keys(counts).map(key => ({ name: key, value: counts[key] })).sort((a, b) => b.value - a.value); 
+  }, [members]);
 
- useEffect(() => {
+  useEffect(() => {
     const init = async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession();
@@ -1385,21 +1433,12 @@ export default function MysticHub() {
     }
   }, [ingameName, members]);
 
-  const classData = useMemo(() => {
-    const counts: Record<string, number> = {};
-    members.forEach(m => {
-        const cls = m.char_class && m.char_class.trim() !== '' ? m.char_class : 'Novice';
-        counts[cls] = (counts[cls] || 0) + 1;
-    });
-    return Object.keys(counts).map(key => ({ name: key, value: counts[key] })).sort((a, b) => b.value - a.value); 
-  }, [members]);
-
   const renderCharacterProfile = (data: any, isInspectionMode: boolean = false) => {
     if (!data) return null;
     const s = data.stats || {};
     const getGlobalMax = (key: string) => Math.max(...members.map(m => Number(m.stats?.[key] || 0)).filter(v => !isNaN(v)), 1);
 
-// 🧮 ฟังก์ชันคำนวณหา % ของสเตตัสเทียบกับอันดับ 1 ในกิลด์
+    // 🧮 ฟังก์ชันคำนวณหา % ของสเตตัสเทียบกับอันดับ 1 ในกิลด์
     const getStatPct = (key: string, val: any) => {
         const max = getGlobalMax(key);
         return max > 0 ? (Number(val || 0) / max) * 100 : 0;
@@ -1455,59 +1494,89 @@ export default function MysticHub() {
     return (
         <div className="space-y-6 animate-in fade-in duration-500 slide-in-from-bottom-2">
             {/* Header Profile */}
-            <div className="bg-[#0f0f13]/60 backdrop-blur-xl rounded-[40px] border border-white/[0.08] p-6 md:p-10 shadow-2xl relative overflow-hidden group">
+            <div className="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/10 blur-[120px] rounded-full -mr-32 -mt-32 pointer-events-none group-hover:bg-purple-600/20 transition-all duration-700"></div>
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10 px-8 md:px-12">
                     <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 lg:w-1/3">
-                        <div className="relative">
-                            <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-blue-500 rounded-[32px] blur opacity-40"></div>
-                            {!isInspectionMode && user?.user_metadata?.avatar_url ? (
-                                <img src={user.user_metadata.avatar_url} className="relative w-32 h-32 md:w-40 md:h-40 rounded-[32px] object-cover border-4 border-[#0a0a0e] shadow-2xl z-10" alt="p" />
-                            ) : (
-                                <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-[32px] border-4 border-[#0a0a0e] shadow-2xl z-10 bg-gradient-to-br from-purple-900 to-slate-900 flex items-center justify-center overflow-hidden">
-                                    <span className="text-6xl font-bold text-white/20 font-tech">{data.ingame_name.charAt(0)}</span>
-                                </div>
-                            )}
-                            <div className={`absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full border border-white/10 shadow-xl z-20 flex items-center gap-2 ${!isInspectionMode ? 'bg-[#0a0a0e]' : 'bg-blue-900/80'}`}>
-                                <div className={`w-2 h-2 rounded-full animate-pulse ${!isInspectionMode ? 'bg-green-500' : 'bg-blue-400'}`}></div>
+                        <div className="relative group">
+                            {/* Glow Behind Avatar */}
+                            <div className={`absolute inset-0 rounded-[32px] blur-md opacity-75 transition-opacity duration-300 ${
+                                globalRank === 1 
+                                ? 'bg-gradient-to-br from-yellow-400 via-amber-400 to-yellow-600 shadow-[0_0_30px_rgba(251,191,36,0.6)]' 
+                                : globalRank <= 3 
+                                ? 'bg-gradient-to-br from-slate-300 via-slate-100 to-slate-400 shadow-[0_0_25px_rgba(203,213,225,0.5)]' 
+                                : 'bg-gradient-to-br from-purple-500 to-blue-500 shadow-[0_0_20px_rgba(168,85,247,0.4)]'
+                            }`}></div>
+                            
+                            {/* Avatar Border Wrapper */}
+                            <div className={`relative p-1 rounded-[32px] z-10 ${
+                                globalRank === 1 
+                                ? 'bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600' 
+                                : globalRank <= 3 
+                                ? 'bg-gradient-to-br from-slate-400 via-slate-200 to-slate-500' 
+                                : 'bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500'
+                            }`}>
+                                {!isInspectionMode && user?.user_metadata?.avatar_url ? (
+                                    <img src={user.user_metadata.avatar_url} className="w-32 h-32 md:w-40 md:h-40 rounded-[28px] object-cover border-4 border-[#020205] shadow-2xl bg-black" alt="Avatar" />
+                                ) : (
+                                    <div className="w-32 h-32 md:w-40 md:h-40 rounded-[28px] border-4 border-[#020205] shadow-2xl bg-gradient-to-br from-[#0c0c12] to-[#1e1e24] flex items-center justify-center overflow-hidden">
+                                        <span className="text-6xl font-bold text-white/20 font-tech">{data.ingame_name.charAt(0)}</span>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Badge Overlay on top of avatar (e.g. 1st, 2nd, etc.) */}
+                            <div className={`absolute -top-3 -right-3 z-30 px-2.5 py-1 rounded-md text-[9px] font-extrabold uppercase tracking-widest shadow-lg ${
+                                globalRank === 1 
+                                ? 'bg-gradient-to-r from-yellow-500 to-amber-600 text-black border border-yellow-300' 
+                                : globalRank <= 3 
+                                ? 'bg-gradient-to-r from-slate-350 to-slate-450 text-black border border-slate-200' 
+                                : 'bg-[#0f0f13] text-purple-400 border border-purple-500/30'
+                            }`}>
+                                {globalRank === 1 ? '🥇 TOP 1' : globalRank <= 3 ? `🥈 TOP ${globalRank}` : `RANK ${globalRank}`}
+                            </div>
+
+                            {/* Online / Offline status badge */}
+                            <div className={`absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full border border-white/10 shadow-xl z-20 flex items-center gap-2 ${!isInspectionMode ? 'bg-[#020205]' : 'bg-blue-950/90'}`}>
+                                <div className={`w-2 h-2 rounded-full animate-pulse ${!isInspectionMode ? 'bg-green-500 shadow-[0_0_8px_#22c55e]' : 'bg-blue-450 shadow-[0_0_8px_#3b82f6]'}`}></div>
                                 <span className="text-[9px] font-bold text-white uppercase tracking-wider font-tech">{!isInspectionMode ? 'Online' : 'Viewing'}</span>
                             </div>
                         </div>
-                        <div className="space-y-2">
+                        <div className="space-y-2 mt-2">
                             <h2 className="text-4xl md:text-6xl font-bold text-white italic uppercase leading-none tracking-tighter drop-shadow-lg">{data.ingame_name}</h2>
                             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
                                 <span className="px-3 py-1 bg-white/5 rounded-lg border border-white/10 text-[10px] font-bold text-purple-400 uppercase tracking-widest font-tech">{data.char_class} {data.sub_class && `/ ${data.sub_class}`}</span>
-                                <div className="flex items-center gap-2">
-                                    <span className="px-3 py-1 bg-slate-800/50 rounded-lg border border-white/10 text-[10px] font-bold text-slate-300 uppercase tracking-widest font-tech">Guild Rank #{globalRank}</span>
-                                    <span className="px-3 py-1 bg-blue-900/40 rounded-lg border border-white/10 text-[10px] font-bold text-blue-300 uppercase tracking-widest font-tech">Class Rank #{rank}</span>
+                                <div className="flex flex-wrap items-center gap-2 mt-1">
+                                    <span className="px-3 py-1 bg-slate-800/40 rounded-lg border border-white/5 text-[10px] font-bold text-slate-300 uppercase tracking-widest font-tech">Guild Rank #{globalRank}</span>
+                                    <span className="px-3 py-1 bg-blue-950/40 rounded-lg border border-white/5 text-[10px] font-bold text-blue-300 uppercase tracking-widest font-tech">Class Rank #{rank}</span>
                                 </div>
                             </div>
                             {isInspectionMode && (
-                              <button onClick={() => handleJumpToCompare(data)} className="mt-3 px-6 py-2 bg-gradient-to-r from-red-600 to-orange-600 rounded-full font-bold text-white text-sm tracking-widest hover:scale-105 transition-transform shadow-lg shadow-red-600/30 flex items-center gap-2 mx-auto lg:mx-0 font-tech"><span>⚔️</span> COMPARE</button>
+                              <button onClick={() => handleJumpToCompare(data)} className="mt-4 px-6 py-2 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-500 hover:to-orange-500 rounded-full font-bold text-white text-sm tracking-widest hover:scale-105 transition-transform shadow-lg shadow-red-655/30 flex items-center gap-2 mx-auto lg:mx-0 font-tech"><span>⚔️</span> COMPARE</button>
                             )}
                         </div>
                     </div>
                     <div className="w-full lg:w-1/3 h-[280px] md:h-[340px] relative">
                         <ResponsiveContainer width="100%" height="100%">
                             <RadarChart cx="50%" cy="50%" outerRadius="75%" data={radarData}>
-                                <PolarGrid stroke="#ffffff15" strokeWidth={1} />
-                                <PolarAngleAxis dataKey="subject" tick={{ fill: '#94a3b8', fontSize: 11, fontWeight: 700 }} />
+                                <PolarGrid stroke="rgba(255, 255, 255, 0.05)" strokeWidth={1} />
+                                <PolarAngleAxis dataKey="subject" tick={{ fill: '#cbd5e1', fontSize: 10, fontWeight: 700, letterSpacing: '0.05em' }} />
                                 <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
-                                <RechartsRadar name="Stats" dataKey="A" stroke="#a855f7" strokeWidth={3} fill="#a855f7" fillOpacity={0.4} />
+                                <RechartsRadar name="Stats" dataKey="A" stroke="#d8b4fe" strokeWidth={2} fill="#a855f7" fillOpacity={0.25} />
                             </RadarChart>
                         </ResponsiveContainer>
                     </div>
                     <div className="lg:w-1/3 flex flex-col items-center lg:items-end justify-center">
-                        <div className="text-right">
+                        <div className="text-center lg:text-right">
                             <span className="text-slate-500 font-bold text-[10px] uppercase tracking-[0.4em] mb-1 block font-tech">Final ∑ CP+ACTIVE</span>
-                            <div className="text-5xl md:text-7xl font-bold italic text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-600 leading-none filter drop-shadow-2xl font-tech">
+                            <div className="text-5xl md:text-7xl font-bold italic text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500 leading-none filter drop-shadow-2xl font-tech">
                                 <CountUp value={Number(data.final_cp)} formatter={(v) => Math.round(v).toLocaleString()} />
                             </div>
-                            <div className="flex flex-col items-end gap-1 mt-3">
-                                <div className="text-purple-400 font-bold text-[10px] tracking-widest bg-purple-900/20 px-3 py-1.5 rounded-lg border border-purple-500/30">
+                            <div className="flex flex-col items-center lg:items-end gap-1 mt-3">
+                                <div className="text-purple-400 font-bold text-[10px] tracking-widest bg-purple-900/10 px-3 py-1.5 rounded-lg border border-purple-500/20">
                                     BASE CP: <span className="text-white">{Number(data.base_cp || 0).toLocaleString()}</span>
                                 </div>
-                                <div className="text-orange-400 font-bold text-[10px] tracking-widest bg-orange-900/20 px-3 py-1.5 rounded-lg border border-orange-500/30">
+                                <div className="text-orange-400 font-bold text-[10px] tracking-widest bg-orange-955/10 px-3 py-1.5 rounded-lg border border-orange-500/25">
                                     ACTIVE SCORE: <span className="text-white">{Number(data.cp_active || 0).toLocaleString()}</span>
                                 </div>
                             </div>
@@ -2113,23 +2182,38 @@ const InvasionOracle = ({ currentUser }: { currentUser: string }) => {
 
                 {/* Display Area */}
                 <div className={`
-                    relative aspect-square rounded-full border-4 flex items-center justify-center overflow-hidden transition-all duration-1000
-                    ${prediction?.threat === 'EXTREME' ? 'border-red-600 bg-red-900/20 shadow-[0_0_50px_rgba(220,38,38,0.5)]' : 
-                      prediction?.threat === 'HIGH' ? 'border-orange-500 bg-orange-900/20 shadow-[0_0_50px_rgba(249,115,22,0.3)]' :
-                      canPredict ? 'border-purple-500/30 bg-purple-900/10 shadow-[0_0_30px_rgba(168,85,247,0.2)]' :
-                      'border-slate-800 bg-black/50 grayscale'}
+                    relative aspect-square rounded-full border-4 flex items-center justify-center overflow-hidden transition-all duration-1000 group/portal
+                    ${prediction?.threat === 'EXTREME' ? 'border-red-500 bg-red-950/20 shadow-[0_0_50px_rgba(239,68,68,0.4)]' : 
+                      prediction?.threat === 'HIGH' ? 'border-orange-500 bg-orange-955/20 shadow-[0_0_50px_rgba(245,158,11,0.3)]' :
+                      canPredict ? 'border-purple-500/30 bg-purple-950/10 shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/60' :
+                      'border-slate-900 bg-black/40 grayscale'}
                 `}>
+                    {/* Dashed Rings spinning in opposite directions */}
+                    {canPredict && !prediction && !isRevealing && (
+                        <>
+                            <div className="absolute inset-4 rounded-full border-2 border-dashed border-purple-500/20 animate-orbit-slow pointer-events-none"></div>
+                            <div className="absolute inset-8 rounded-full border border-dashed border-indigo-500/10 animate-orbit-reverse pointer-events-none"></div>
+                            <div className="absolute inset-12 rounded-full border-2 border-dotted border-purple-500/5 animate-orbit-slow pointer-events-none"></div>
+                        </>
+                    )}
+                    {isRevealing && (
+                        <>
+                            <div className="absolute inset-2 rounded-full border-2 border-dashed border-purple-500/60 animate-spin pointer-events-none"></div>
+                            <div className="absolute inset-6 rounded-full border border-dashed border-indigo-500/40 animate-orbit-reverse pointer-events-none"></div>
+                        </>
+                    )}
+
                     {isRevealing ? (
-                        <div className="text-4xl font-black text-white/50 font-tech animate-pulse">{animationText}</div>
+                        <div className="text-4xl font-black text-white/50 font-tech animate-pulse z-10">{animationText}</div>
                     ) : prediction ? (
-                        <div className="animate-in zoom-in duration-500 flex flex-col items-center">
-                            {prediction.threat === 'EXTREME' && <Skull size={64} className="text-red-500 mb-4 animate-bounce" />}
-                            {/* ... (Show Result Logic เหมือนเดิม) ... */}
-                            <div className={`text-5xl font-black font-tech uppercase mb-2 ${prediction.threat === 'EXTREME' ? 'text-red-500' : 'text-white'}`}>{prediction.name}</div>
-                            <div className="text-xs font-bold uppercase tracking-widest text-slate-400">Threat Level: {prediction.threat}</div>
+                        <div className="animate-in zoom-in duration-500 flex flex-col items-center z-10 p-4 text-center">
+                            {prediction.threat === 'EXTREME' && <Skull size={64} className="text-red-500 mb-4 animate-bounce drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]" />}
+                            {prediction.threat === 'HIGH' && <ShieldAlert size={64} className="text-orange-500 mb-4 animate-pulse drop-shadow-[0_0_15px_rgba(245,158,11,0.5)]" />}
+                            <div className={`text-4xl md:text-5xl font-black font-tech uppercase mb-2 ${prediction.threat === 'EXTREME' ? 'text-red-500 drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]' : prediction.threat === 'HIGH' ? 'text-orange-400 drop-shadow-[0_0_10px_rgba(245,158,11,0.5)]' : 'text-white'}`}>{prediction.name}</div>
+                            <div className={`text-xs font-bold uppercase tracking-widest ${prediction.threat === 'EXTREME' ? 'text-red-400/80' : prediction.threat === 'HIGH' ? 'text-orange-400/80' : 'text-slate-400'}`}>Threat Level: {prediction.threat}</div>
                         </div>
                     ) : (
-                        <div className={`${canPredict ? 'text-purple-500/30' : 'text-slate-800'} text-6xl font-tech`}>?</div>
+                        <div className={`relative z-10 ${canPredict ? 'text-purple-500/50 drop-shadow-[0_0_10px_rgba(168,85,247,0.3)] animate-pulse' : 'text-slate-800'} text-7xl font-tech`}>?</div>
                     )}
                 </div>
 
@@ -2140,26 +2224,29 @@ const InvasionOracle = ({ currentUser }: { currentUser: string }) => {
                         <button 
                             onClick={castProphecy}
                             disabled={isRevealing}
-                            className={`w-full py-4 rounded-xl font-bold text-lg uppercase tracking-[0.2em] transition-all ${isRevealing ? 'bg-slate-800 text-slate-500' : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-lg shadow-purple-900/40 hover:scale-105 active:scale-95'}`}
+                            className={`w-full py-4 rounded-xl font-bold text-lg uppercase tracking-[0.2em] transition-all border border-purple-500/30 hover:border-purple-500/80 ${isRevealing ? 'bg-slate-900 text-slate-500 border-white/5' : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-lg shadow-purple-900/40 hover:scale-105 active:scale-95'}`}
                         >
                             {isRevealing ? 'Aligning Stars...' : 'Open The Gate'}
                         </button>
                     ) : (
                         // กรณี 2: ปุ่มปิด (แบ่งเป็น 2 สาเหตุ)
-                        <div className="bg-black/40 border border-white/5 p-4 rounded-xl flex items-center justify-center gap-3 text-slate-500">
-                            <Lock size={20} />
-                            <span className="text-xs font-bold uppercase tracking-wider">
-                                {!isOracle 
-                                    ? "Access Denied: Guild Master Only" 
-                                    : "Portal Closed (Opens Tue & Thu)"} {/* ถ้าเป็นหัวกิลด์แต่วันผิด จะขึ้นอันนี้ */}
-                            </span>
+                        <div className="glass-card border-red-500/20 p-4 rounded-xl flex items-center justify-center gap-3 text-red-455 shadow-[0_0_15px_rgba(239,68,68,0.05)]">
+                            <ShieldAlert size={20} className="text-red-500 animate-pulse" />
+                            <div className="flex flex-col items-start text-left">
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-red-500">ACCESS RESTRICTED</span>
+                                <span className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                                    {!isOracle 
+                                        ? "Authentication Failed: Guild Master Key Required" 
+                                        : "Planetary Alignment Mismatch: Opens Tue & Thu"}
+                                </span>
+                            </div>
                         </div>
                     )}
                 </div>
                 
                 {/* บอกวันปัจจุบันให้ user รู้ */}
                 {!canPredict && isOracle && (
-                   <div className="text-[10px] text-red-400/50 uppercase tracking-widest">
+                   <div className="text-[10px] text-red-400/50 uppercase tracking-widest font-tech">
                        Current Planetary Alignment: {['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][today]}
                    </div>
                 )}
