@@ -1083,7 +1083,7 @@ const handleEditClick = (boss: any) => {
                         </select>
                     </div>
                     <button onClick={handleCopySchedule} className={`px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2 ${isCopied ? 'bg-green-500 border-green-500 text-white' : 'bg-blue-600/20 border-blue-500 text-blue-400 hover:bg-blue-600/40'}`}><span>{isCopied ? '✅ COPIED!' : '📋 COPY 6H'}</span></button>
-                    <button onClick={testSound} className="px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-bold hover:bg-purple-500/20 transition-all uppercase tracking-widest">🔔 TESTvercel --prod</button>
+                    <button onClick={testSound} className="px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-bold hover:bg-purple-500/20 transition-all uppercase tracking-widest">🔔 TEST</button>
                     <button onClick={toggleSound} className={`flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-widest transition-all ${isSoundOn ? 'bg-green-500/10 border-green-500 text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.3)]' : 'bg-white/5 border-white/10 text-slate-500 hover:text-white'}`}><span>{isSoundOn ? '🔊' : '🔇'}</span><span>{isSoundOn ? 'ON' : 'OFF'}</span></button>
                 </div>
             </div>
